@@ -3,21 +3,233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>MelianCustomCrafts</title>
+    <style>
+        /* CSS Reset & Variables */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --primary-color: #d81b60;
+            --primary-hover: #ad1457;
+            --bg-color: #fff5f7;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding-bottom: 3rem;
+        }
+
+        /* Header Section */
+        header {
+            text-align: center;
+            padding: 2.5rem 1rem 1.5rem;
+        }
+
+        header h1 {
+            font-size: 2.4rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        /* Hero Image Container */
+        .hero-container {
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+            padding: 0 1rem;
+            text-align: center;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-height: 380px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(216, 27, 96, 0.15);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hero-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 30px rgba(216, 27, 96, 0.25);
+        }
+
+        /* Craft Options Grid */
+        .main-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #444;
+        }
+
+        .craft-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Interactive Cards */
+        .craft-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-color);
+            border: 2px solid transparent;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .craft-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 20px rgba(216, 27, 96, 0.15);
+        }
+
+        .craft-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .craft-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        /* CTA Order Section */
+        .cta-container {
+            text-align: center;
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        .btn-order {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 0.9rem 2.2rem;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 12px rgba(216, 27, 96, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-order:hover {
+            background-color: var(--primary-hover);
+            transform: scale(1.05);
+            box-shadow: 0 6px 18px rgba(216, 27, 96, 0.4);
+        }
+
+        /* Modal Preview Overlay */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 85%;
+            border-radius: 12px;
+        }
+    </style>
 </head>
 <body>
-    <img src ="https://scontent.fceb6-1.fna.fbcdn.net/v/t39.30808-6/680309497_122107707812882238_7522797812361206006_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x1024&ctp=s1536x1024&_nc_cat=105&ccb=1-7&_nc_sid=cc71e4&_nc_eui2=AeHjeJOrX2kcuHfaHkFtQkUtf8MEN5gugnV_wwQ3mC6CdYMYpPc97XJdw1nUTmp-2ANKQgebV6ozyFZoKR_KmwbE&_nc_ohc=wj_xZwm0aGgQ7kNvwGGl1KZ&_nc_oc=AdpH5CSRSuuwse8C_YUEEdXKgDi_6BqRQEE9saFfVmc7gj0DBi1RfjrVFcfJ3YIkL9dLW7jkkXjEgx0DW2Qw5hwm&_nc_zt=23&_nc_ht=scontent.fceb6-1.fna&_nc_gid=fbx65-7eQrTd2-Woc3kGNw&_nc_ss=7b2a8&oh=00_AQGCAZd51GPrDWtyOeBHTpnI0VPuI6dcFQytvqr1ssA74g&oe=6A924F3B"height = "300" width = "600">
-    
-    <h1>Welcome to MelianCustomCrafts</h1>
-<ul>
-<li><a href = "options/satin.html">SATIN</a></li>
-<li><a href = "options/fuzzy.html">FUZZY WIRE</li>
-<li><a href = "options/others.html">OTHERS</a></li>
 
+    <header>
+        <h1>Welcome to MelianCustomCrafts</h1>
+        <p>Handmade with care & custom designed for you</p>
+    </header>
 
+    <!-- Clickable Banner Image -->
+    <div class="hero-container">
+        <img src="https://scontent.fceb6-1.fna.fbcdn.net/v/t39.30808-6/680309497_122107707812882238_7522797812361206006_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x1024&ctp=s1536x1024&_nc_cat=105&ccb=1-7&_nc_sid=cc71e4&_nc_eui2=AeHjeJOrX2kcuHfaHkFtQkUtf8MEN5gugnV_wwQ3mC6CdYMYpPc97XJdw1nUTmp-2ANKQgebV6ozyFZoKR_KmwbE&_nc_ohc=wj_xZwm0aGgQ7kNvwGGl1KZ&_nc_oc=AdpH5CSRSuuwse8C_YUEEdXKgDi_6BqRQEE9saFfVmc7gj0DBi1RfjrVFcfJ3YIkL9dLW7jkkXjEgx0DW2Qw5hwm&_nc_zt=23&_nc_ht=scontent.fceb6-1.fna&_nc_gid=fbx65-7eQrTd2-Woc3kGNw&_nc_ss=7b2a8&oh=00_AQGCAZd51GPrDWtyOeBHTpnI0VPuI6dcFQytvqr1ssA74g&oe=6A924F3B" 
+             alt="MelianCustomCrafts Featured Work" 
+             class="hero-image" 
+             onclick="openModal(this.src)">
+    </div>
 
-</ul>
-<a href ="https://www.facebook.com/profile.php?id=61576467142168"><u>ORDER HERE</u></a>
+    <main class="main-content">
+        <h2 class="section-title">Explore Our Craft Categories</h2>
+        
+        <!-- Interactive Card Links -->
+        <div class="craft-grid">
+            <a href="options/satin.html" class="craft-card">
+                <span class="craft-icon">🎀</span>
+                <h3>Satin Crafts</h3>
+            </a>
 
+            <a href="options/fuzzy.html" class="craft-card">
+                <span class="craft-icon">🌸</span>
+                <h3>Fuzzy Wire</h3>
+            </a>
+
+            <a href="options/others.html" class="craft-card">
+                <span class="craft-icon">✨</span>
+                <h3>Other Creations</h3>
+            </a>
+        </div>
+
+        <!-- Prominent Call to Action Button -->
+        <div class="cta-container">
+            <h3 style="margin-bottom: 0.8rem;">Ready for your custom order?</h3>
+            <a href="https://www.facebook.com/profile.php?id=61576467142168" target="_blank" class="btn-order">
+                Order Here on Facebook
+            </a>
+        </div>
+    </main>
+
+    <!-- Modal Element for Image Viewing -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <img id="modalImg" src="" alt="Full size preview">
+    </div>
+
+    <script>
+        function openModal(src) {
+            document.getElementById('modalImg').src = src;
+            document.getElementById('modalModal') ? null : document.getElementById('imageModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
