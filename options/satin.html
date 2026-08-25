@@ -3,77 +3,264 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Satin Bouquets - MelianCustomCrafts</title>
+    <style>
+        /* CSS Reset & General Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --primary-color: #d81b60;
+            --primary-hover: #ad1457;
+            --bg-color: #fff5f7;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 2rem 1rem 3rem;
+        }
+
+        /* Navigation Bar */
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            background: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+            transition: all 0.2s ease;
+        }
+
+        .btn-back:hover {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        /* Page Header */
+        header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: #666;
+            font-size: 1.05rem;
+        }
+
+        /* Product Gallery Grid */
+        .product-grid {
+            max-width: 1000px;
+            margin: 0 auto 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Individual Product Card */
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(216, 27, 96, 0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--bg-color);
+        }
+
+        .product-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-title {
+            font-size: 1.4rem;
+            color: #222;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .price-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Price Table Styling */
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+        }
+
+        .price-table tr {
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .price-table tr:last-child {
+            border-bottom: none;
+        }
+
+        .price-table td {
+            padding: 0.4rem 0;
+            font-size: 0.95rem;
+        }
+
+        .price-table td.amount {
+            text-align: right;
+            font-weight: 600;
+            color: #111;
+        }
+
+        /* Call To Action Banner */
+        .cta-card {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        .cta-card h3 {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .cta-card p {
+            color: #666;
+            margin-bottom: 1.2rem;
+        }
+
+        .btn-order {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(216, 27, 96, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .btn-order:hover {
+            background-color: var(--primary-hover);
+            transform: scale(1.03);
+            box-shadow: 0 6px 16px rgba(216, 27, 96, 0.35);
+        }
+    </style>
 </head>
 <body>
 
-    <a href ="../index.html">GO BACK</a>
-    <h1>Round Satin Bouquet</h1>
-<img src ="https://scontent.fceb6-1.fna.fbcdn.net/v/t39.99422-6/774667910_1106639022038983_1252678258150063521_n.png?stp=dst-jpg_tt6&cstp=mx720x960&ctp=s720x960&_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeE-t4tCF_FBstcN-qfM-le397HGzk7N3mL3scbOTs3eYkPbk0qBxCgl0LM-uQ-FL42ngsLlrWfvpQ4L8kvwRxs0&_nc_ohc=zRF_j_91H1YQ7kNvwHVR9mY&_nc_oc=Adr6FudbYi8Tl7H_7Dxzr8i3vCLy1V8ZLkvux8KMnxHedPRgRDrrVR_ar923LiC6Ilx845003JpZH0pZGeY77lPz&_nc_zt=14&_nc_ht=scontent.fceb6-1.fna&_nc_gid=BCOhtWKeLImOx5GDCy5qUQ&_nc_ss=7b2a8&oh=00_AQG_SYtZle25Iv7AIn3v1NI-nbdtHCmh9gttEtaZAEoyag&oe=6A924BA8"height = "250" width = "250">
-<p><u><b>PRICE LIST :</b></u></p>
-<ul>
-<li>3 pcs—₱119 
-</li>
-<li>7 pcs—₱279
-</li>
-<li>8 pcs—₱299
-</li>
-<li>10 pcs—₱349
-</li>
-<li>16 pcs—₱599
-</li>
-<li>18 pcs—₱759
-</li>
-<li>19 pcs—₱789
-</li>
+    <!-- Back Button Navigation -->
+    <div class="nav-container">
+        <a href="../index.html" class="btn-back">← Back to Home</a>
+    </div>
 
+    <!-- Section Header -->
+    <header>
+        <h1>Satin Ribbon Bouquets</h1>
+        <p>Handcrafted satin rose arrangements made to last forever</p>
+    </header>
 
+    <!-- Product Cards Grid -->
+    <main class="product-grid">
 
+        <!-- Product Card 1: Round Satin Bouquet -->
+        <article class="product-card">
+            <img src="https://scontent.fceb6-1.fna.fbcdn.net/v/t39.99422-6/774667910_1106639022038983_1252678258150063521_n.png?stp=dst-jpg_tt6&cstp=mx720x960&ctp=s720x960&_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeE-t4tCF_FBstcN-qfM-le397HGzk7N3mL3scbOTs3eYkPbk0qBxCgl0LM-uQ-FL42ngsLlrWfvpQ4L8kvwRxs0&_nc_ohc=zRF_j_91H1YQ7kNvwHVR9mY&_nc_oc=Adr6FudbYi8Tl7H_7Dxzr8i3vCLy1V8ZLkvux8KMnxHedPRgRDrrVR_ar923LiC6Ilx845003JpZH0pZGeY77lPz&_nc_zt=14&_nc_ht=scontent.fceb6-1.fna&_nc_gid=BCOhtWKeLImOx5GDCy5qUQ&_nc_ss=7b2a8&oh=00_AQG_SYtZle25Iv7AIn3v1NI-nbdtHCmh9gttEtaZAEoyag&oe=6A924BA8" 
+                 alt="Round Satin Bouquet" 
+                 class="product-image">
+            <div class="product-content">
+                <h2 class="product-title">Round Satin Bouquet</h2>
+                <div class="price-title">Price List</div>
+                <table class="price-table">
+                    <tr><td>3 pieces</td><td class="amount">₱119</td></tr>
+                    <tr><td>7 pieces</td><td class="amount">₱279</td></tr>
+                    <tr><td>8 pieces</td><td class="amount">₱299</td></tr>
+                    <tr><td>10 pieces</td><td class="amount">₱349</td></tr>
+                    <tr><td>16 pieces</td><td class="amount">₱599</td></tr>
+                    <tr><td>18 pieces</td><td class="amount">₱759</td></tr>
+                    <tr><td>19 pieces</td><td class="amount">₱789</td></tr>
+                </table>
+            </div>
+        </article>
 
+        <!-- Product Card 2: Round Bouquet With Glitters -->
+        <article class="product-card">
+            <img src="https://scontent.fceb2-2.fna.fbcdn.net/v/t39.30808-6/674212777_122106358676882238_7007165353006452598_n.jpg?stp=cp6_dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeG7ABdQg5iSe6eqa2hdiDfjAFPAuvBD1MIAU8C68EPUwhcV8VJfLD9qYi01D-1OVx7F2tzfgxPYA2bH4jQsfKRz&_nc_ohc=WzCjOQMPJ60Q7kNvwG5zg69&_nc_oc=AdpQpC3vUsOyGI9HO1qbfNGBYL_A5U4YS6RbxXj94Na3lovePoiztMoooQGXEnSXa04jBBK90q7kpsB88pdYMLy0&_nc_zt=23&_nc_ht=scontent.fceb2-2.fna&_nc_gid=Hm5tHGc6NG4IpSKrJJLEEg&_nc_ss=7b2a8&oh=00_AQEhJG4BP_e5X2o6dQONV3GNdASxZp-gVxcAr_ZjFA4EfQ&oe=6A9233D1" 
+                 alt="Round Bouquet With Glitters" 
+                 class="product-image">
+            <div class="product-content">
+                <h2 class="product-title">Round Bouquet With Glitters</h2>
+                <div class="price-title">Price List</div>
+                <table class="price-table">
+                    <tr><td>3 pieces</td><td class="amount">₱149</td></tr>
+                    <tr><td>7 pieces</td><td class="amount">₱309</td></tr>
+                    <tr><td>8 pieces</td><td class="amount">₱329</td></tr>
+                    <tr><td>10 pieces</td><td class="amount">₱379</td></tr>
+                    <tr><td>16 pieces</td><td class="amount">₱629</td></tr>
+                    <tr><td>18 pieces</td><td class="amount">₱799</td></tr>
+                    <tr><td>19 pieces</td><td class="amount">₱819</td></tr>
+                </table>
+            </div>
+        </article>
 
+    </main>
 
-
-
-
-
-</ul>
-
-<h2>Round Bouquet With Glitters</h2>
-
-<img src ="https://scontent.fceb2-2.fna.fbcdn.net/v/t39.30808-6/674212777_122106358676882238_7007165353006452598_n.jpg?stp=cp6_dst-jpg_tt6&cstp=mx1536x2048&ctp=s1536x2048&_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeG7ABdQg5iSe6eqa2hdiDfjAFPAuvBD1MIAU8C68EPUwhcV8VJfLD9qYi01D-1OVx7F2tzfgxPYA2bH4jQsfKRz&_nc_ohc=WzCjOQMPJ60Q7kNvwG5zg69&_nc_oc=AdpQpC3vUsOyGI9HO1qbfNGBYL_A5U4YS6RbxXj94Na3lovePoiztMoooQGXEnSXa04jBBK90q7kpsB88pdYMLy0&_nc_zt=23&_nc_ht=scontent.fceb2-2.fna&_nc_gid=Hm5tHGc6NG4IpSKrJJLEEg&_nc_ss=7b2a8&oh=00_AQEhJG4BP_e5X2o6dQONV3GNdASxZp-gVxcAr_ZjFA4EfQ&oe=6A9233D1"height = "250" width = "250">
-<p><u><b>PRICE LIST :</b></u></p>
-<ul>
-<li>3 pcs—₱149 
-</li>
-<li>7 pcs—₱309
-</li>
-<li>8 pcs—₱329
-</li>
-<li>10 pcs—₱379
-</li>
-<li>16 pcs—₱629
-</li>
-<li>18 pcs—₱799
-</li>
-<li>19 pcs—₱819
-</li>
-
-
-
-
-
-
-
-</ul>
-
-<p><i><b>You can customize your own bouquet!</b></i></p>
-<a href = "https://www.facebook.com/profile.php?id=61576467142168">CLICK HERE</a>
-
-
-
-
-
-
+    <!-- Order Customization Banner -->
+    <div class="cta-card">
+        <h3>Want a custom color or combination?</h3>
+        <p>You can customize your own bouquet arrangement with us!</p>
+        <a href="https://www.facebook.com/profile.php?id=61576467142168" target="_blank" class="btn-order">
+            Order Custom Bouquet on Facebook
+        </a>
+    </div>
 
 </body>
 </html>
