@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - MelianCustomCrafts</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fff5f7;
+            color: #333;
+            padding: 2rem;
+        }
+
+        .admin-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #fff5f7;
+            padding-bottom: 1rem;
+        }
+
+        .admin-header h1 {
+            color: #d81b60;
+            font-size: 1.8rem;
+        }
+
+        .btn-clear {
+            background-color: #e53935;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn-clear:hover {
+            background-color: #c62828;
+        }
+
+        /* Orders Table */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 0.9rem;
+            border-bottom: 1px solid #eee;
+            font-size: 0.95rem;
+        }
+
+        th {
+            background-color: #fff5f7;
+            color: #d81b60;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background-color: #fffafb;
+        }
+
+        .badge-gcash {
+            background-color: #0072ce;
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .badge-cash {
+            background-color: #2e7d32;
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .no-orders {
+            text-align: center;
+            padding: 3rem;
+            color: #888;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1>MelianCustomCrafts - Orders Dashboard</h1>
+            <button class="btn-clear" onclick="clearOrders()">Clear All Orders</button>
+        </div>
+
+        <div class="table-responsive">
+            <table id="ordersTable">
+                <thead>
+                    <tr>
+                        <th>Order Ref</th>
+                        <th>Date</th>
+                        <th>Customer</th>
+                        <th>Phone</th>
+                        <th>Craft & Variant</th>
+                        <th>Payment</th>
+                        <th>Address & Notes</th>
+                    </tr>
+                </thead>
+                <tbody id="ordersBody">
+                    <!-- Orders will render dynamically -->
+                </tbody>
+            </table>
+            <div id="noOrdersMessage" class="no-orders" style="display: none;">
+                No orders recorded on this device yet.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function loadOrders() {
+            const ordersBody = document.getElementById('ordersBody');
+            const noOrdersMessage = document.getElementById('noOrdersMessage');
+            const orders = JSON.parse(localStorage.getItem('melian_orders') || '[]');
+
+            ordersBody.innerHTML = '';
+
+            if (orders.length === 0) {
+                noOrdersMessage.style.display = 'block';
+                return;
+            }
+
+            noOrdersMessage.style.display = 'none';
+
+            // Loop through stored orders in reverse (newest first)
+            orders.slice().reverse().forEach(order => {
+                const tr = document.createElement('tr');
+                
+                const isGcash = order.paymentMethod === 'GCash';
+                const paymentBadge = isGcash 
+                    ? `<span class="badge-gcash">GCash</span>` 
+                    : `<span class="badge-cash">Cash / COD</span>`;
+
+                tr.innerHTML = `
+                    <td><strong>${order.id || 'N/A'}</strong></td>
+                    <td>${order.date || 'N/A'}</td>
+                    <td>${order.name}</td>
+                    <td>${order.phone}</td>
+                    <td><strong>${order.craft}</strong><br><small style="color:#666;">${order.variant || ''}</small></td>
+                    <td>${paymentBadge}</td>
+                    <td>
+                        <strong>Address:</strong> ${order.address}<br>
+                        ${order.notes ? `<small style="color:#d81b60;">Note: ${order.notes}</small>` : ''}
+                    </td>
+                `;
+                ordersBody.appendChild(tr);
+            });
+        }
+
+        function clearOrders() {
+            if (confirm('Are you sure you want to clear all order records from local storage?')) {
+                localStorage.removeItem('melian_orders');
+                loadOrders();
+            }
+        }
+
+        // Load data on load
+        window.onload = loadOrders;
+    </script>
+
+</body>
+</html>

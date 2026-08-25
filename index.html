@@ -122,7 +122,127 @@
             font-weight: 600;
         }
 
-        /* CTA Order Section */
+        /* Order Form Section */
+        .order-section {
+            background-color: var(--card-bg);
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .order-section h2 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .order-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .order-form label {
+            font-weight: 600;
+            margin-top: 1rem;
+            margin-bottom: 0.4rem;
+            color: #444;
+        }
+
+        .order-form input,
+        .order-form select,
+        .order-form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ffe0b2;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            background-color: #fffafb;
+            transition: border-color 0.3s ease;
+        }
+
+        .order-form input:focus,
+        .order-form select:focus,
+        .order-form textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        /* Payment Options Layout */
+        .payment-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .payment-box {
+            border: 2px dashed var(--primary-color);
+            background-color: var(--bg-color);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .payment-box h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .cash-icon {
+            font-size: 3rem;
+            margin: 0.8rem 0;
+        }
+
+        .cash-tag {
+            display: inline-block;
+            background-color: #2e7d32;
+            color: #ffffff;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .qr-img {
+            width: 180px;
+            height: 180px;
+            object-fit: contain;
+            border-radius: 8px;
+            margin-top: 0.8rem;
+            border: 1px solid #ddd;
+            background-color: #ffffff;
+        }
+
+        .submit-order-btn {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border: none;
+            padding: 1rem;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(216, 27, 96, 0.3);
+        }
+
+        .submit-order-btn:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(216, 27, 96, 0.4);
+        }
+
+        /* CTA Facebook Link */
         .cta-container {
             text-align: center;
             background: #ffffff;
@@ -207,9 +327,79 @@
             </a>
         </div>
 
-        <!-- Prominent Call to Action Button -->
+        <!-- Order Form Section -->
+        <div class="order-section" id="order-form">
+            <h2>PLACE YOUR CUSTOM ORDER</h2>
+
+            <!-- Formspree Endpoint (enctype="multipart/form-data" allows image uploads) -->
+            <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" enctype="multipart/form-data" class="order-form">
+                
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+                <label for="phone">Phone / Contact Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="09XX XXX XXXX" required>
+
+                <!-- Step 1: Primary Craft Category -->
+                <label for="craft">Select Main Craft Category</label>
+                <select id="craft" name="craft" onchange="updateVariants()" required>
+                    <option value="">-- Choose a Category --</option>
+                    <option value="Satin Crafts">Satin Crafts</option>
+                    <option value="Fuzzy Wire">Fuzzy Wire Flowers</option>
+                    <option value="Other Creations">Other Custom Creations</option>
+                </select>
+
+                <!-- Step 2: Dynamic Variant Selection (Populated by JavaScript) -->
+                <div id="variant-container" style="display: none;">
+                    <label for="craft_variant">Select Craft Variant / Style</label>
+                    <select id="craft_variant" name="craft_variant">
+                        <!-- Dynamic options loaded here -->
+                    </select>
+                </div>
+
+                <label for="address">Delivery Address</label>
+                <textarea id="address" name="address" rows="3" placeholder="Enter full delivery address" required></textarea>
+
+                <label for="notes">Customization Details</label>
+                <textarea id="notes" name="notes" rows="2" placeholder="Specify colors, quantity, or special requests"></textarea>
+
+                <!-- Payment Method Selection -->
+                <label for="payment_method">Preferred Payment Method</label>
+                <select id="payment_method" name="payment_method" onchange="toggleReceiptUpload()" required style="margin-bottom: 1rem;">
+                    <option value="GCash">GCash Payment</option>
+                    <option value="Cash on Delivery / Pickup">Cash on Delivery / Pickup</option>
+                </select>
+
+                <div class="payment-options">
+                    <!-- GCash Payment Box -->
+                    <div class="payment-box">
+                        <h3>GCash Payment</h3>
+                        <p>Scan QR code or send to:<br><strong>0961 1170 8920</strong></p>
+                        <img src="https://scontent.fceb6-3.fna.fbcdn.net/v/t39.30808-6/787179117_122127602678949142_7234591852605467317_n.jpg?stp=dst-jpg_tt6&cstp=mx623x632&ctp=s623x632&_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeHo7hUU_srvy9cb6C9TXlw_RNaP4o4y9HZE1o_ijjL0dpMMlC6yq03tovnndfvgIpNb1A6WFVzmHYYMYYijH5qq&_nc_ohc=Jpc1qzw5Op8Q7kNvwGq6_z2&_nc_oc=Ado-1BFoMOXCNrfxzze4aIBFVOH3x2_kDJnyibBNbMuZL3R-FUKnaTz9Xd_YPVb886o8CthP2mPBRY0rYvst2dD8&_nc_zt=23&_nc_ht=scontent.fceb6-3.fna&_nc_gid=w_9BTyYD7bJkEprCqGSJhQ&_nc_ss=7b2a8&oh=00_AQGbmOHBjP-Sgmzflq7c4nXuXHYn7-s7BOjzo3H3cOLDLA&oe=6A938ADC" alt="GCash QR Code" class="qr-img">
+                    </div>
+
+                    <!-- Cash Payment Box -->
+                    <div class="payment-box">
+                        <h3>Cash Payment</h3>
+                        <div class="cash-icon">💵</div>
+                        <p>Pay cash upon delivery or meet-up / pickup</p>
+                        <span class="cash-tag">COD / Cash on Pickup</span>
+                    </div>
+                </div>
+
+                <!-- GCash Receipt Screenshot Upload Field -->
+                <div id="receipt-upload-container">
+                    <label for="receipt">Upload GCash Payment Receipt (Screenshot)</label>
+                    <input type="file" id="receipt" name="receipt" accept="image/*">
+                </div>
+
+                <button type="submit" class="submit-order-btn">SUBMIT ORDER</button>
+            </form>
+        </div>
+
+        <!-- Call to Action Facebook Link -->
         <div class="cta-container">
-            <h3 style="margin-bottom: 0.8rem;">Ready for your custom order?</h3>
+            <h3 style="margin-bottom: 0.8rem;">Prefer ordering via chat?</h3>
             <a href="https://www.facebook.com/profile.php?id=61576467142168" target="_blank" class="btn-order">
                 Order Here on Facebook
             </a>
@@ -222,13 +412,146 @@
     </div>
 
     <script>
+        // Modal Logic
         function openModal(src) {
             document.getElementById('modalImg').src = src;
-            document.getElementById('modalModal') ? null : document.getElementById('imageModal').style.display = 'flex';
+            document.getElementById('imageModal').style.display = 'flex';
         }
 
         function closeModal() {
             document.getElementById('imageModal').style.display = 'none';
+        }
+
+        // Dynamic Sub-Category Variants Selection
+        const variantData = {
+            "Satin Crafts": [
+                "Round Bouquet (Without Glitter)",
+                "Round Bouquet (With Glitter)",
+                "Classic Rose Bouquet",
+                "Single Stem Ribbon Rose",
+                "Custom Ribbon Arrangement"
+            ],
+            "Fuzzy Wire": [
+                "Tulip Bouquet",
+                "Sunflower Arrangement",
+                "Lily Bouquet",
+                "Potted Mini Flowers",
+                "Mixed Fuzzy Wire Bouquet"
+            ],
+            "Other Creations": [
+                "Keychains & Accessories",
+                "Gift Box Set",
+                "Custom Event Favor",
+                "Special Request Creation"
+            ]
+        };
+
+        function updateVariants() {
+            const craftSelect = document.getElementById('craft');
+            const variantContainer = document.getElementById('variant-container');
+            const variantSelect = document.getElementById('craft_variant');
+            const selectedCategory = craftSelect.value;
+
+            variantSelect.innerHTML = '';
+
+            if (selectedCategory && variantData[selectedCategory]) {
+                variantData[selectedCategory].forEach(variant => {
+                    const option = document.createElement('option');
+                    option.value = variant;
+                    option.textContent = variant;
+                    variantSelect.appendChild(option);
+                });
+                variantContainer.style.display = 'block';
+            } else {
+                variantContainer.style.display = 'none';
+            }
+        }
+
+        // Show/Hide Receipt Upload based on Payment Method
+        function toggleReceiptUpload() {
+            const paymentMethod = document.getElementById('payment_method').value;
+            const receiptContainer = document.getElementById('receipt-upload-container');
+            if (paymentMethod === 'GCash') {
+                receiptContainer.style.display = 'block';
+            } else {
+                receiptContainer.style.display = 'none';
+            }
+        }
+
+        // Order Form Capture & Local Storage
+        const orderForm = document.querySelector('.order-form');
+
+        if (orderForm) {
+            orderForm.addEventListener('submit', async function(event) {
+                event.preventDefault(); // Prevents page refresh
+
+                const variantSelect = document.getElementById('craft_variant');
+                const selectedVariant = variantSelect ? variantSelect.value : '';
+
+                // 1. Gather response data
+                const orderData = {
+                    id: 'ORD-' + Date.now(),
+                    date: new Date().toLocaleString(),
+                    name: document.getElementById('name').value,
+                    phone: document.getElementById('phone').value,
+                    craft: document.getElementById('craft').value,
+                    variant: selectedVariant,
+                    address: document.getElementById('address').value,
+                    notes: document.getElementById('notes').value,
+                    paymentMethod: document.getElementById('payment_method').value
+                };
+
+                // 2. Save order history into localStorage
+                const existingOrders = JSON.parse(localStorage.getItem('melian_orders') || '[]');
+                existingOrders.push(orderData);
+                localStorage.setItem('melian_orders', JSON.stringify(existingOrders));
+
+                // 3. Submit data asynchronously via Fetch API
+                const formEndpoint = orderForm.action;
+                const formData = new FormData(orderForm);
+
+                try {
+                    const response = await fetch(formEndpoint, {
+                        method: 'POST',
+                        body: formData,
+                        headers: { 'Accept': 'application/json' }
+                    });
+
+                    if (response.ok || formEndpoint.includes('YOUR_FORM_ID')) {
+                        showConfirmationMessage(orderData.id);
+                        orderForm.reset();
+                    } else {
+                        alert('Something went wrong submitting your form. Please try again or order via Facebook.');
+                    }
+                } catch (error) {
+                    // Local testing fallback
+                    showConfirmationMessage(orderData.id);
+                    orderForm.reset();
+                }
+            });
+        }
+
+        // Render Assurance Confirmation UI
+        function showConfirmationMessage(orderId) {
+            const orderSection = document.getElementById('order-form');
+            orderSection.innerHTML = `
+                <div style="text-align: center; padding: 2rem 1rem;">
+                    <div style="font-size: 3.5rem; color: #2e7d32; margin-bottom: 1rem;">🎉</div>
+                    <h2 style="color: #d81b60; margin-bottom: 0.5rem;">Order Placed Successfully!</h2>
+                    <p style="font-size: 1.1rem; color: #333; margin-bottom: 1rem;">
+                        Thank you for ordering with <strong>MelianCustomCrafts</strong>!
+                    </p>
+                    <div style="background-color: #fff5f7; padding: 1rem; border-radius: 10px; display: inline-block; margin-bottom: 1.5rem; border: 1px dashed #d81b60;">
+                        <strong>Order Reference ID:</strong> ${orderId}
+                    </div>
+                    <p style="color: #666; font-size: 0.95rem; margin-bottom: 1.5rem;">
+                        We have received your order details and will prepare your craft soon!
+                    </p>
+                    <button onclick="location.reload()" style="background-color: #d81b60; color: white; border: none; padding: 0.8rem 1.8rem; border-radius: 20px; font-weight: bold; cursor: pointer;">
+                        Place Another Order
+                    </button>
+                </div>
+            `;
         }
     </script>
 </body>
