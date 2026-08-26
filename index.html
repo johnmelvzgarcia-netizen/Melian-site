@@ -1,2262 +1,758 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>MelianCustomCrafts | Custom Handmade Crafts</title>
-
-    <style>
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        :root {
-            --primary-color: #d81b60;
-            --primary-hover: #ad1457;
-            --bg-color: #fff5f7;
-            --card-bg: #ffffff;
-            --text-color: #333333;
-            --muted-color: #666666;
-            --success-color: #2e7d32;
-            --danger-color: #c62828;
-            --border-color: #ffe0b2;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family:
-                'Segoe UI',
-                Tahoma,
-                Geneva,
-                Verdana,
-                sans-serif;
-
-            background-color: var(--bg-color);
-            color: var(--text-color);
-
-            line-height: 1.6;
-
-            padding-bottom: 3rem;
-        }
-
-        /* =========================
-           HEADER
-        ========================== */
-
-        header {
-            text-align: center;
-            padding: 2.5rem 1rem 1.5rem;
-        }
-
-        header h1 {
-            font-size: 2.4rem;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        header p {
-            font-size: 1.1rem;
-            color: var(--muted-color);
-        }
-
-        /* =========================
-           HERO
-        ========================== */
-
-        .hero-container {
-            max-width: 800px;
-            margin: 0 auto 2.5rem;
-            padding: 0 1rem;
-            text-align: center;
-        }
-
-        .hero-image {
-            width: 100%;
-            max-height: 380px;
-            object-fit: cover;
-
-            border-radius: 16px;
-
-            box-shadow:
-                0 8px 24px rgba(216, 27, 96, 0.15);
-
-            cursor: pointer;
-
-            transition:
-                transform 0.3s ease,
-                box-shadow 0.3s ease;
-        }
-
-        .hero-image:hover {
-            transform: scale(1.02);
-
-            box-shadow:
-                0 12px 30px rgba(216, 27, 96, 0.25);
-        }
-
-        /* =========================
-           MAIN
-        ========================== */
-
-        .main-content {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-
-        .section-title {
-            text-align: center;
-
-            font-size: 1.5rem;
-
-            margin-bottom: 1.5rem;
-
-            color: #444;
-        }
-
-        /* =========================
-           CRAFT CARDS
-        ========================== */
-
-        .craft-grid {
-            display: grid;
-
-            grid-template-columns:
-                repeat(
-                    auto-fit,
-                    minmax(240px, 1fr)
-                );
-
-            gap: 1.5rem;
-
-            margin-bottom: 3rem;
-        }
-
-        .craft-card {
-            background-color: var(--card-bg);
-
-            border-radius: 12px;
-
-            padding: 2rem 1.5rem;
-
-            text-align: center;
-
-            text-decoration: none;
-
-            color: var(--text-color);
-
-            border: 2px solid transparent;
-
-            box-shadow:
-                0 4px 12px rgba(0, 0, 0, 0.05);
-
-            transition: all 0.3s ease;
-
-            display: flex;
-
-            flex-direction: column;
-
-            align-items: center;
-
-            justify-content: center;
-        }
-
-        .craft-card:hover {
-            transform: translateY(-6px);
-
-            border-color:
-                var(--primary-color);
-
-            box-shadow:
-                0 10px 20px
-                rgba(216, 27, 96, 0.15);
-        }
-
-        .craft-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .craft-card h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-        }
-
-        /* =========================
-           ORDER SECTION
-        ========================== */
-
-        .order-section {
-            background-color: var(--card-bg);
-
-            max-width: 800px;
-
-            margin:
-                0 auto 2.5rem;
-
-            padding: 2.5rem;
-
-            border-radius: 16px;
-
-            box-shadow:
-                0 6px 20px
-                rgba(0, 0, 0, 0.06);
-        }
-
-        .order-section h2 {
-            text-align: center;
-
-            color:
-                var(--primary-color);
-
-            margin-bottom: 0.5rem;
-
-            font-size: 1.8rem;
-        }
-
-        .order-subtitle {
-            text-align: center;
-
-            color:
-                var(--muted-color);
-
-            margin-bottom: 1.5rem;
-
-            font-size: 0.95rem;
-        }
-
-        /* =========================
-           FORM
-        ========================== */
-
-        .order-form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .order-form label {
-            font-weight: 600;
-
-            margin-top: 1rem;
-            margin-bottom: 0.4rem;
-
-            color: #444;
-        }
-
-        .required {
-            color:
-                var(--danger-color);
-        }
-
-        .order-form input,
-        .order-form select,
-        .order-form textarea {
-
-            width: 100%;
-
-            padding: 0.8rem;
-
-            border:
-                2px solid
-                var(--border-color);
-
-            border-radius: 8px;
-
-            font-size: 1rem;
-
-            font-family: inherit;
-
-            background-color:
-                #fffafb;
-
-            transition:
-                border-color 0.3s ease,
-                box-shadow 0.3s ease;
-        }
-
-        .order-form textarea {
-            resize: vertical;
-            min-height: 90px;
-        }
-
-        .order-form input:focus,
-        .order-form select:focus,
-        .order-form textarea:focus {
-
-            outline: none;
-
-            border-color:
-                var(--primary-color);
-
-            box-shadow:
-                0 0 0 3px
-                rgba(216, 27, 96, 0.08);
-        }
-
-        .field-help {
-            font-size: 0.8rem;
-
-            color:
-                var(--muted-color);
-
-            margin-top: 0.25rem;
-        }
-
-        /* =========================
-           PAYMENT
-        ========================== */
-
-        .payment-options {
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(
-                    auto-fit,
-                    minmax(250px, 1fr)
-                );
-
-            gap: 1.5rem;
-
-            margin: 1.5rem 0;
-        }
-
-        .payment-box {
-
-            border:
-                2px dashed
-                var(--primary-color);
-
-            background-color:
-                var(--bg-color);
-
-            padding: 1.5rem;
-
-            border-radius: 12px;
-
-            text-align: center;
-
-            display: flex;
-
-            flex-direction: column;
-
-            align-items: center;
-
-            justify-content: center;
-        }
-
-        .payment-box h3 {
-
-            color:
-                var(--primary-color);
-
-            margin-bottom:
-                0.5rem;
-        }
-
-        .cash-icon {
-
-            font-size: 3rem;
-
-            margin:
-                0.8rem 0;
-        }
-
-        .cash-tag {
-
-            display: inline-block;
-
-            background-color:
-                var(--success-color);
-
-            color: white;
-
-            padding:
-                0.4rem 1rem;
-
-            border-radius: 20px;
-
-            font-weight: bold;
-
-            font-size: 0.9rem;
-
-            margin-top:
-                0.5rem;
-        }
-
-        .qr-img {
-
-            width: 180px;
-            height: 180px;
-
-            object-fit: contain;
-
-            border-radius: 8px;
-
-            margin-top:
-                0.8rem;
-
-            border:
-                1px solid #ddd;
-
-            background-color:
-                white;
-        }
-
-        /* =========================
-           RECEIPT
-        ========================== */
-
-        #receipt-upload-container {
-            margin-top: 0.5rem;
-        }
-
-        .receipt-preview {
-
-            display: none;
-
-            width: 180px;
-
-            max-height: 220px;
-
-            object-fit: contain;
-
-            margin-top: 1rem;
-
-            border-radius: 10px;
-
-            border:
-                2px solid #eee;
-
-            background:
-                white;
-        }
-
-        /* =========================
-           STATUS
-        ========================== */
-
-        .form-status {
-
-            display: none;
-
-            margin-top: 1rem;
-
-            padding:
-                0.9rem 1rem;
-
-            border-radius: 8px;
-
-            font-size: 0.95rem;
-
-            text-align: center;
-        }
-
-        .form-status.error {
-
-            display: block;
-
-            background-color:
-                #ffebee;
-
-            color:
-                var(--danger-color);
-
-            border:
-                1px solid #ffcdd2;
-        }
-
-        .form-status.success {
-
-            display: block;
-
-            background-color:
-                #e8f5e9;
-
-            color:
-                var(--success-color);
-
-            border:
-                1px solid #c8e6c9;
-        }
-
-        /* =========================
-           SUBMIT
-        ========================== */
-
-        .submit-order-btn {
-
-            background-color:
-                var(--primary-color);
-
-            color: white;
-
-            border: none;
-
-            padding: 1rem;
-
-            border-radius: 30px;
-
-            font-size: 1.1rem;
-
-            font-weight: bold;
-
-            cursor: pointer;
-
-            margin-top: 1.5rem;
-
-            transition: all 0.3s ease;
-
-            box-shadow:
-                0 4px 12px
-                rgba(216, 27, 96, 0.3);
-        }
-
-        .submit-order-btn:hover {
-
-            background-color:
-                var(--primary-hover);
-
-            transform:
-                translateY(-2px);
-
-            box-shadow:
-                0 6px 18px
-                rgba(216, 27, 96, 0.4);
-        }
-
-        .submit-order-btn:disabled {
-
-            background-color:
-                #ccc;
-
-            cursor:
-                not-allowed;
-
-            box-shadow: none;
-
-            transform: none;
-        }
-
-        /* =========================
-           FACEBOOK CTA
-        ========================== */
-
-        .cta-container {
-
-            text-align: center;
-
-            background:
-                white;
-
-            border-radius:
-                16px;
-
-            padding:
-                2rem;
-
-            box-shadow:
-                0 4px 16px
-                rgba(0, 0, 0, 0.06);
-        }
-
-        .btn-order {
-
-            display: inline-block;
-
-            background-color:
-                var(--primary-color);
-
-            color: white;
-
-            text-decoration: none;
-
-            padding:
-                0.9rem 2.2rem;
-
-            border-radius:
-                30px;
-
-            font-weight: bold;
-
-            font-size:
-                1.1rem;
-
-            box-shadow:
-                0 4px 12px
-                rgba(216, 27, 96, 0.3);
-
-            transition:
-                all 0.3s ease;
-        }
-
-        .btn-order:hover {
-
-            background-color:
-                var(--primary-hover);
-
-            transform:
-                scale(1.05);
-
-            box-shadow:
-                0 6px 18px
-                rgba(216, 27, 96, 0.4);
-        }
-
-        /* =========================
-           MODAL
-        ========================== */
-
-        .modal {
-
-            display: none;
-
-            position: fixed;
-
-            inset: 0;
-
-            width: 100%;
-            height: 100%;
-
-            background:
-                rgba(0, 0, 0, 0.8);
-
-            justify-content:
-                center;
-
-            align-items:
-                center;
-
-            z-index: 1000;
-
-            cursor: pointer;
-        }
-
-        .modal img {
-
-            max-width:
-                90%;
-
-            max-height:
-                85%;
-
-            border-radius:
-                12px;
-
-            cursor:
-                default;
-        }
-
-        /* =========================
-           SUCCESS PAGE
-        ========================== */
-
-        .success-icon {
-
-            font-size:
-                4rem;
-
-            margin-bottom:
-                1rem;
-        }
-
-        .order-reference {
-
-            background:
-                var(--bg-color);
-
-            padding:
-                1rem;
-
-            border-radius:
-                10px;
-
-            display:
-                inline-block;
-
-            margin:
-                1rem 0 1.5rem;
-
-            border:
-                1px dashed
-                var(--primary-color);
-        }
-
-        .success-note {
-
-            color:
-                var(--muted-color);
-
-            font-size:
-                0.95rem;
-
-            margin-bottom:
-                1.5rem;
-        }
-
-        .reload-btn {
-
-            background:
-                var(--primary-color);
-
-            color:
-                white;
-
-            border:
-                none;
-
-            padding:
-                0.8rem 1.8rem;
-
-            border-radius:
-                20px;
-
-            font-weight:
-                bold;
-
-            cursor:
-                pointer;
-        }
-
-        /* =========================
-           MOBILE
-        ========================== */
-
-        @media (max-width: 600px) {
-
-            header h1 {
-                font-size:
-                    1.9rem;
-            }
-
-            header p {
-                font-size:
-                    1rem;
-            }
-
-            .main-content {
-                padding:
-                    0 1rem;
-            }
-
-            .order-section {
-                padding:
-                    1.5rem;
-            }
-
-            .order-section h2 {
-                font-size:
-                    1.5rem;
-            }
-
-            .payment-options {
-                grid-template-columns:
-                    1fr;
-            }
-
-            .craft-grid {
-                grid-template-columns:
-                    1fr;
-            }
-
-        }
-
-    </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#d81b60">
+<title>MelianCustomCrafts | Custom Handmade Crafts</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --primary:#d81b60;
+  --primary-dark:#ad1457;
+  --bg:#fff5f7;
+  --card:#fff;
+  --text:#333;
+  --muted:#666;
+  --border:#ffd6e2;
+  --success:#2e7d32;
+  --danger:#c62828;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Segoe UI",Tahoma,Geneva,Verdana,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+  padding-bottom:40px;
+}
+header{text-align:center;padding:38px 16px 22px}
+header h1{font-size:clamp(1.8rem,6vw,2.4rem);color:var(--primary);margin-bottom:6px}
+header p{font-size:1rem;color:var(--muted)}
+.hero-container{max-width:800px;margin:0 auto 38px;padding:0 16px}
+.hero-image{
+  display:block;width:100%;max-height:380px;object-fit:cover;border-radius:16px;
+  box-shadow:0 8px 24px rgba(216,27,96,.15);cursor:pointer;
+}
+.main-content{max-width:900px;margin:auto;padding:0 16px}
+.section-title{text-align:center;font-size:1.5rem;margin-bottom:22px;color:#444}
+.craft-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px;margin-bottom:38px
+}
+.craft-card{
+  background:var(--card);border-radius:14px;padding:28px 18px;text-align:center;
+  text-decoration:none;color:var(--text);border:2px solid transparent;
+  box-shadow:0 4px 12px rgba(0,0,0,.05);transition:.2s;
+}
+.craft-card:hover,.craft-card:focus{transform:translateY(-4px);border-color:var(--primary)}
+.craft-icon{font-size:2.5rem;display:block;margin-bottom:8px}
+.order-section{
+  background:var(--card);max-width:800px;margin:0 auto 28px;padding:clamp(20px,5vw,40px);
+  border-radius:18px;box-shadow:0 6px 20px rgba(0,0,0,.06)
+}
+.order-section h2{text-align:center;color:var(--primary);margin-bottom:6px;font-size:1.75rem}
+.order-subtitle{text-align:center;color:var(--muted);font-size:.95rem;margin-bottom:22px}
+.order-form{display:flex;flex-direction:column}
+.order-form label{font-weight:600;margin:15px 0 6px;color:#444}
+.required{color:var(--danger)}
+.order-form input,.order-form select,.order-form textarea{
+  width:100%;padding:13px;border:2px solid var(--border);border-radius:9px;
+  font:inherit;font-size:16px;background:#fffafb;min-height:48px
+}
+.order-form textarea{min-height:95px;resize:vertical}
+.order-form input:focus,.order-form select:focus,.order-form textarea:focus{
+  outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(216,27,96,.08)
+}
+.field-help{font-size:.82rem;color:var(--muted);margin-top:4px}
+.payment-options{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:16px
+}
+.payment-box{
+  border:2px dashed var(--primary);background:var(--bg);padding:20px;border-radius:12px;
+  text-align:center;display:flex;flex-direction:column;align-items:center
+}
+.payment-box h3{color:var(--primary);margin-bottom:6px}
+.cash-icon{font-size:3rem;margin:10px}
+.cash-tag{background:var(--success);color:#fff;padding:6px 14px;border-radius:20px;font-weight:700;font-size:.85rem;margin-top:8px}
+.qr-img{width:180px;height:180px;object-fit:contain;border-radius:8px;margin-top:10px;border:1px solid #ddd;background:#fff}
+#receipt-upload-container{margin-top:4px}
+.file-picker{
+  border:2px dashed #f3a4bc;border-radius:12px;padding:14px;background:#fffafb
+}
+.file-picker input{border:0;padding:5px;background:transparent}
+.receipt-preview{
+  display:none;width:min(100%,300px);max-height:320px;object-fit:contain;margin:14px auto 0;
+  border-radius:10px;border:2px solid #eee;background:#fff
+}
+.form-status{
+  display:none;margin-top:16px;padding:12px 14px;border-radius:9px;text-align:center;font-size:.95rem
+}
+.form-status.error{display:block;background:#ffebee;color:var(--danger);border:1px solid #ffcdd2}
+.form-status.success{display:block;background:#e8f5e9;color:var(--success);border:1px solid #c8e6c9}
+.submit-order-btn{
+  width:100%;background:var(--primary);color:#fff;border:0;padding:15px;border-radius:30px;
+  font-size:1.08rem;font-weight:700;cursor:pointer;margin-top:20px;min-height:52px;
+  box-shadow:0 4px 12px rgba(216,27,96,.3);transition:.2s
+}
+.submit-order-btn:hover{background:var(--primary-dark)}
+.submit-order-btn:disabled{background:#aaa;cursor:not-allowed;box-shadow:none}
+.cta-container{
+  text-align:center;background:#fff;border-radius:16px;padding:26px;
+  box-shadow:0 4px 16px rgba(0,0,0,.06);max-width:800px;margin:auto
+}
+.btn-order{
+  display:inline-block;background:var(--primary);color:#fff;text-decoration:none;padding:13px 30px;
+  border-radius:30px;font-weight:700;box-shadow:0 4px 12px rgba(216,27,96,.3)
+}
+.modal{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,.82);
+  justify-content:center;align-items:center;z-index:1000;padding:20px
+}
+.modal img{max-width:95%;max-height:90%;border-radius:12px}
+.success-icon{font-size:4rem;margin-bottom:10px}
+.order-reference{
+  background:var(--bg);padding:14px 18px;border-radius:10px;display:inline-block;
+  margin:16px 0;border:1px dashed var(--primary)
+}
+.success-note{color:var(--muted);font-size:.95rem;margin-bottom:20px}
+.reload-btn{
+  background:var(--primary);color:#fff;border:0;padding:12px 24px;border-radius:22px;
+  font-weight:700;cursor:pointer
+}
+.hidden{display:none!important}
+@media(max-width:600px){
+  header{padding-top:28px}
+  .main-content{padding:0 10px}
+  .order-section{padding:20px 16px;border-radius:14px}
+  .payment-options{grid-template-columns:1fr}
+  .craft-grid{grid-template-columns:1fr}
+  .hero-container{padding:0 10px}
+}
+</style>
 </head>
 
 <body>
 
+<header>
+  <h1>Welcome to MelianCustomCrafts</h1>
+  <p>Handmade with care & custom designed for you</p>
+</header>
 
-    <!-- =========================
-         HEADER
-    ========================== -->
+<div class="hero-container">
+  <img
+    src="https://scontent.fceb6-1.fna.fbcdn.net/v/t39.30808-6/680309497_122107707812882238_7522797812361206006_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x1024&ctp=s1536x1024&_nc_cat=105&ccb=1-7&_nc_sid=cc71e4&_nc_eui2=AeHjeJOrX2kcuHfaHkFtQkUtf8MEN5gugnV_wwQ3mC6CdYMYpPc97XJdw1nUTmp-2ANKQgebV6ozyFZoKR_KmwbE&_nc_ohc=wj_xZwm0aGgQ7kNvwGGl1KZ&_nc_oc=AdpH5CSRSuuwse8C_YUEEdXKgDi_6BqRQEE9saFfVmc7gj0DBi1RfjrVFcfJ3YIkL9dLW7jkkXjEgx0DW2Qw5hwm&_nc_zt=23&_nc_ht=scontent.fceb6-1.fna&_nc_gid=fbx65-7eQrTd2-Woc3kGNw&_nc_ss=7b2a8&oh=00_AQGCAZd51GPrDWtyOeBHTpnI0VPuI6dcFQytvqr1ssA74g&oe=6A924F3B"
+    alt="MelianCustomCrafts Featured Work"
+    class="hero-image"
+    onclick="openModal(this.src)"
+  >
+</div>
 
-    <header>
+<main class="main-content">
 
-        <h1>
-            Welcome to MelianCustomCrafts
-        </h1>
+<h2 class="section-title">Explore Our Craft Categories</h2>
 
-        <p>
-            Handmade with care & custom designed for you
-        </p>
+<div class="craft-grid">
+  <a href="options/satin.html" class="craft-card">
+    <span class="craft-icon">🎀</span><h3>Satin Crafts</h3>
+  </a>
+  <a href="options/fuzzy.html" class="craft-card">
+    <span class="craft-icon">🌸</span><h3>Fuzzy Wire</h3>
+  </a>
+  <a href="options/others.html" class="craft-card">
+    <span class="craft-icon">✨</span><h3>Other Creations</h3>
+  </a>
+</div>
 
-    </header>
+<div class="order-section" id="order-form-section">
 
+<h2>PLACE YOUR CUSTOM ORDER</h2>
+<p class="order-subtitle">Fill out the form below and we'll get in touch with you about your order.</p>
 
-    <!-- =========================
-         HERO IMAGE
-    ========================== -->
+<form
+  id="orderForm"
+  action="https://formspree.io/f/mnpaevzk"
+  method="POST"
+  class="order-form"
+>
 
-    <div class="hero-container">
+  <input type="hidden" name="subject" id="subject" value="New MelianCustomCrafts Order">
+  <input type="hidden" name="order_reference" id="order_reference">
+  <input type="hidden" name="_gotcha" tabindex="-1" autocomplete="off"
+         style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
 
-        <img
-            src="https://scontent.fceb6-1.fna.fbcdn.net/v/t39.30808-6/680309497_122107707812882238_7522797812361206006_n.jpg?stp=dst-jpg_tt6&cstp=mx1536x1024&ctp=s1536x1024&_nc_cat=105&ccb=1-7&_nc_sid=cc71e4&_nc_eui2=AeHjeJOrX2kcuHfaHkFtQkUtf8MEN5gugnV_wwQ3mC6CdYMYpPc97XJdw1nUTmp-2ANKQgebV6ozyFZoKR_KmwbE&_nc_ohc=wj_xZwm0aGgQ7kNvwGGl1KZ&_nc_oc=AdpH5CSRSuuwse8C_YUEEdXKgDi_6BqRQEE9saFfVmc7gj0DBi1RfjrVFcfJ3YIkL9dLW7jkkXjEgx0DW2Qw5hwm&_nc_zt=23&_nc_ht=scontent.fceb6-1.fna&_nc_gid=fbx65-7eQrTd2-Woc3kGNw&_nc_ss=7b2a8&oh=00_AQGCAZd51GPrDWtyOeBHTpnI0VPuI6dcFQytvqr1ssA74g&oe=6A924F3B"
-            alt="MelianCustomCrafts Featured Work"
-            class="hero-image"
-            onclick="openModal(this.src)"
-        >
+  <label for="name">Full Name <span class="required">*</span></label>
+  <input type="text" id="name" name="name" placeholder="Enter your full name"
+         autocomplete="name" maxlength="100" required>
 
+  <label for="email">Email Address <span class="required">*</span></label>
+  <input type="email" id="email" name="email" placeholder="example@gmail.com"
+         autocomplete="email" maxlength="150" required>
+  <p class="field-help">We'll use this email to contact you about your order.</p>
+
+  <label for="phone">Phone / Contact Number <span class="required">*</span></label>
+  <input type="tel" id="phone" name="phone" placeholder="09XX XXX XXXX"
+         autocomplete="tel" inputmode="tel" maxlength="20" required>
+
+  <label for="craft">Select Main Craft Category <span class="required">*</span></label>
+  <select id="craft" name="craft" required>
+    <option value="">-- Choose a Category --</option>
+    <option value="Satin Crafts">Satin Crafts</option>
+    <option value="Fuzzy Wire Flowers">Fuzzy Wire Flowers</option>
+    <option value="Other Custom Creations">Other Custom Creations</option>
+  </select>
+
+  <div id="variant-container" class="hidden">
+    <label for="craft_variant">Select Craft Variant / Style <span class="required">*</span></label>
+    <select id="craft_variant" name="craft_variant" required></select>
+  </div>
+
+  <label for="quantity">Quantity <span class="required">*</span></label>
+  <input type="number" id="quantity" name="quantity" min="1" max="100" value="1" required>
+
+  <label for="delivery_date">Preferred Delivery / Pickup Date</label>
+  <input type="date" id="delivery_date" name="delivery_date">
+  <p class="field-help">This is a preferred date, not a guaranteed schedule.</p>
+
+  <label for="address">Delivery Address <span class="required">*</span></label>
+  <textarea id="address" name="address" rows="3"
+            placeholder="Enter your complete delivery address"
+            autocomplete="street-address" maxlength="1000" required></textarea>
+
+  <label for="notes">Customization Details</label>
+  <textarea id="notes" name="notes" rows="3"
+            placeholder="Specify colors, ribbon colors, special requests, etc."
+            maxlength="1500"></textarea>
+
+  <label for="payment_method">Preferred Payment Method <span class="required">*</span></label>
+  <select id="payment_method" name="payment_method" required>
+    <option value="GCash">GCash Payment</option>
+    <option value="Cash on Delivery / Pickup">Cash on Delivery / Pickup</option>
+  </select>
+
+  <div class="payment-options">
+
+    <div class="payment-box">
+      <h3>GCash Payment</h3>
+      <p>Scan the QR code or send payment to:<br><strong>0961 1170 8920</strong></p>
+      <img
+        src="https://scontent.fceb6-3.fna.fbcdn.net/v/t39.30808-6/787179117_122127602678949142_7234591852605467317_n.jpg?stp=dst-jpg_tt6&cstp=mx623x632&ctp=s623x632&_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeHo7hUU_srvy9cb6C9TXlw_RNaP4o4y9HZE1o_ijjL0dpMMlC6yq03tovnndfvgIpNb1A6WFVzmHYYMYYijH5qq&_nc_ohc=Jpc1qzw5Op8Q7kNvwGq6_z2&_nc_oc=Ado-1BFoMOXCNrfxzze4aIBFVOH3x2_kDJnyibBNbMuZL3R-FUKnaTz9Xd_YPVb886o8CthP2mPBRY0rYvst2dD8&_nc_zt=23&_nc_ht=scontent.fceb6-3.fna&_nc_gid=w_9BTyYD7bJkEprCqGSJhQ&_nc_ss=7b2a8&oh=00_AQGbmOHBjP-Sgmzflq7c4nXuXHYn7-s7BOjzo3H3cOLDLA&oe=6A938ADC"
+        alt="GCash QR Code" class="qr-img"
+      >
     </div>
 
-
-    <main class="main-content">
-
-
-        <!-- =========================
-             CATEGORIES
-        ========================== -->
-
-        <h2 class="section-title">
-            Explore Our Craft Categories
-        </h2>
-
-
-        <div class="craft-grid">
-
-            <a
-                href="options/satin.html"
-                class="craft-card"
-            >
-                <span class="craft-icon">
-                    🎀
-                </span>
-
-                <h3>
-                    Satin Crafts
-                </h3>
-            </a>
-
-
-            <a
-                href="options/fuzzy.html"
-                class="craft-card"
-            >
-                <span class="craft-icon">
-                    🌸
-                </span>
-
-                <h3>
-                    Fuzzy Wire
-                </h3>
-            </a>
-
-
-            <a
-                href="options/others.html"
-                class="craft-card"
-            >
-                <span class="craft-icon">
-                    ✨
-                </span>
-
-                <h3>
-                    Other Creations
-                </h3>
-            </a>
-
-        </div>
-
-
-        <!-- =========================
-             ORDER FORM
-        ========================== -->
-
-        <div
-            class="order-section"
-            id="order-form-section"
-        >
-
-            <h2>
-                PLACE YOUR CUSTOM ORDER
-            </h2>
-
-            <p class="order-subtitle">
-                Fill out the form below and we'll get in touch with you about your order.
-            </p>
-
-
-            <form
-                id="orderForm"
-                action="https://formspree.io/f/mnpaevzk"
-                method="POST"
-                class="order-form"
-            >
-
-
-                <!-- FORM SUBJECT -->
-
-                <input
-                    type="hidden"
-                    id="subject"
-                    name="subject"
-                    value="New MelianCustomCrafts Order"
-                >
-
-
-                <!-- HONEYPOT -->
-
-                <input
-                    type="text"
-                    name="_gotcha"
-                    tabindex="-1"
-                    autocomplete="off"
-                    style="
-                        position:absolute;
-                        left:-9999px;
-                        width:1px;
-                        height:1px;
-                        opacity:0;
-                    "
-                >
-
-
-                <!-- NAME -->
-
-                <label for="name">
-                    Full Name
-                    <span class="required">*</span>
-                </label>
-
-                <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Enter your full name"
-                    autocomplete="name"
-                    required
-                >
-
-
-                <!-- EMAIL -->
-
-                <label for="email">
-                    Email Address
-                    <span class="required">*</span>
-                </label>
-
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="example@gmail.com"
-                    autocomplete="email"
-                    required
-                >
-
-                <p class="field-help">
-                    We'll use this email to contact you about your order.
-                </p>
-
-
-                <!-- PHONE -->
-
-                <label for="phone">
-                    Phone / Contact Number
-                    <span class="required">*</span>
-                </label>
-
-                <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    placeholder="09XX XXX XXXX"
-                    autocomplete="tel"
-                    inputmode="tel"
-                    required
-                >
-
-
-                <!-- CATEGORY -->
-
-                <label for="craft">
-                    Select Main Craft Category
-                    <span class="required">*</span>
-                </label>
-
-                <select
-                    id="craft"
-                    name="craft"
-                    required
-                >
-
-                    <option value="">
-                        -- Choose a Category --
-                    </option>
-
-                    <option value="Satin Crafts">
-                        Satin Crafts
-                    </option>
-
-                    <option value="Fuzzy Wire Flowers">
-                        Fuzzy Wire Flowers
-                    </option>
-
-                    <option value="Other Custom Creations">
-                        Other Custom Creations
-                    </option>
-
-                </select>
-
-
-                <!-- VARIANT -->
-
-                <div
-                    id="variant-container"
-                    style="display:none;"
-                >
-
-                    <label for="craft_variant">
-
-                        Select Craft Variant / Style
-
-                        <span class="required">
-                            *
-                        </span>
-
-                    </label>
-
-                    <select
-                        id="craft_variant"
-                        name="craft_variant"
-                    >
-
-                    </select>
-
-                </div>
-
-
-                <!-- QUANTITY -->
-
-                <label for="quantity">
-                    Quantity
-                    <span class="required">*</span>
-                </label>
-
-                <input
-                    type="number"
-                    id="quantity"
-                    name="quantity"
-                    min="1"
-                    max="100"
-                    value="1"
-                    required
-                >
-
-
-                <!-- DELIVERY DATE -->
-
-                <label for="delivery_date">
-                    Preferred Delivery / Pickup Date
-                </label>
-
-                <input
-                    type="date"
-                    id="delivery_date"
-                    name="delivery_date"
-                >
-
-                <p class="field-help">
-                    This is your preferred date, not a guaranteed schedule.
-                </p>
-
-
-                <!-- ADDRESS -->
-
-                <label for="address">
-                    Delivery Address
-                    <span class="required">*</span>
-                </label>
-
-                <textarea
-                    id="address"
-                    name="address"
-                    rows="3"
-                    placeholder="Enter your complete delivery address"
-                    autocomplete="street-address"
-                    required
-                ></textarea>
-
-
-                <!-- NOTES -->
-
-                <label for="notes">
-                    Customization Details
-                </label>
-
-                <textarea
-                    id="notes"
-                    name="notes"
-                    rows="3"
-                    placeholder="Specify colors, quantity details, ribbon colors, special requests, etc."
-                ></textarea>
-
-
-                <!-- PAYMENT -->
-
-                <label for="payment_method">
-                    Preferred Payment Method
-                    <span class="required">*</span>
-                </label>
-
-                <select
-                    id="payment_method"
-                    name="payment_method"
-                    required
-                >
-
-                    <option value="GCash">
-                        GCash Payment
-                    </option>
-
-                    <option value="Cash on Delivery / Pickup">
-                        Cash on Delivery / Pickup
-                    </option>
-
-                </select>
-
-
-                <!-- PAYMENT BOXES -->
-
-                <div class="payment-options">
-
-
-                    <!-- GCASH -->
-
-                    <div class="payment-box">
-
-                        <h3>
-                            GCash Payment
-                        </h3>
-
-                        <p>
-                            Scan the QR code or send payment to:
-                            <br>
-
-                            <strong>
-                                0961 1170 8920
-                            </strong>
-                        </p>
-
-
-                        <img
-                            src="https://scontent.fceb6-3.fna.fbcdn.net/v/t39.30808-6/787179117_122127602678949142_7234591852605467317_n.jpg?stp=dst-jpg_tt6&cstp=mx623x632&ctp=s623x632&_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeHo7hUU_srvy9cb6C9TXlw_RNaP4o4y9HZE1o_ijjL0dpMMlC6yq03tovnndfvgIpNb1A6WFVzmHYYMYYijH5qq&_nc_ohc=Jpc1qzw5Op8Q7kNvwGq6_z2&_nc_oc=Ado-1BFoMOXCNrfxzze4aIBFVOH3x2_kDJnyibBNbMuZL3R-FUKnaTz9Xd_YPVb886o8CthP2mPBRY0rYvst2dD8&_nc_zt=23&_nc_ht=scontent.fceb6-3.fna&_nc_gid=w_9BTyYD7bJkEprCqGSJhQ&_nc_ss=7b2a8&oh=00_AQGbmOHBjP-Sgmzflq7c4nXuXHYn7-s7BOjzo3H3cOLDLA&oe=6A938ADC"
-                            alt="GCash QR Code"
-                            class="qr-img"
-                        >
-
-                    </div>
-
-
-                    <!-- CASH -->
-
-                    <div class="payment-box">
-
-                        <h3>
-                            Cash Payment
-                        </h3>
-
-                        <div class="cash-icon">
-                            💵
-                        </div>
-
-                        <p>
-                            Pay cash upon delivery or meet-up / pickup.
-                        </p>
-
-                        <span class="cash-tag">
-                            COD / Cash on Pickup
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <!-- RECEIPT -->
-
-                <div
-                    id="receipt-upload-container"
-                >
-
-                    <label for="receipt">
-
-                        Upload GCash Payment Receipt
-
-                        <span class="required">
-                            *
-                        </span>
-
-                    </label>
-
-                    <input
-                        type="file"
-                        id="receipt"
-                        name="receipt"
-                        accept="image/jpeg,image/png,image/webp"
-                    >
-
-                    <p class="field-help">
-                        Required for GCash orders. JPG, PNG or WEBP. Maximum 10MB.
-                    </p>
-
-
-                    <img
-                        id="receipt-preview"
-                        class="receipt-preview"
-                        alt="Receipt preview"
-                    >
-
-                </div>
-
-
-                <!-- STATUS -->
-
-                <div
-                    id="form-status"
-                    class="form-status"
-                    role="alert"
-                ></div>
-
-
-                <!-- SUBMIT -->
-
-                <button
-                    type="submit"
-                    id="submitOrderBtn"
-                    class="submit-order-btn"
-                >
-                    SUBMIT ORDER
-                </button>
-
-            </form>
-
-        </div>
-
-
-        <!-- =========================
-             FACEBOOK
-        ========================== -->
-
-        <div class="cta-container">
-
-            <h3
-                style="margin-bottom:0.8rem;"
-            >
-                Prefer ordering via chat?
-            </h3>
-
-            <a
-                href="https://www.facebook.com/profile.php?id=61576467142168"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn-order"
-            >
-                Order Here on Facebook
-            </a>
-
-        </div>
-
-    </main>
-
-
-    <!-- =========================
-         MODAL
-    ========================== -->
-
-    <div
-        id="imageModal"
-        class="modal"
-        onclick="closeModal()"
-    >
-
-        <img
-            id="modalImg"
-            src=""
-            alt="Full size preview"
-            onclick="event.stopPropagation()"
-        >
-
+    <div class="payment-box">
+      <h3>Cash Payment</h3>
+      <div class="cash-icon">💵</div>
+      <p>Pay cash upon delivery or meet-up / pickup.</p>
+      <span class="cash-tag">COD / Cash on Pickup</span>
     </div>
 
-
-    <script>
-
-        /* ==========================================
-           CONFIG
-        ========================================== */
-
-        const IMGBB_API_KEY =
-            "006494015295b6463bd3f0ada4aeac84";
-
-        const FORMSPREE_ENDPOINT =
-            "https://formspree.io/f/mnpaevzk";
-
-
-        /* ==========================================
-           MODAL
-        ========================================== */
-
-        function openModal(src) {
-
-            document.getElementById(
-                "modalImg"
-            ).src = src;
-
-            document.getElementById(
-                "imageModal"
-            ).style.display = "flex";
-        }
-
-
-        function closeModal() {
-
-            document.getElementById(
-                "imageModal"
-            ).style.display = "none";
-        }
-
-
-        /* ==========================================
-           ELEMENTS
-        ========================================== */
-
-        const orderForm =
-            document.getElementById(
-                "orderForm"
-            );
-
-        const craftSelect =
-            document.getElementById(
-                "craft"
-            );
-
-        const variantContainer =
-            document.getElementById(
-                "variant-container"
-            );
-
-        const variantSelect =
-            document.getElementById(
-                "craft_variant"
-            );
-
-        const paymentMethod =
-            document.getElementById(
-                "payment_method"
-            );
-
-        const receiptContainer =
-            document.getElementById(
-                "receipt-upload-container"
-            );
-
-        const receiptInput =
-            document.getElementById(
-                "receipt"
-            );
-
-        const receiptPreview =
-            document.getElementById(
-                "receipt-preview"
-            );
-
-        const submitButton =
-            document.getElementById(
-                "submitOrderBtn"
-            );
-
-        const formStatus =
-            document.getElementById(
-                "form-status"
-            );
-
-
-        /* ==========================================
-           VARIANT DATA
-        ========================================== */
-
-        const variantData = {
-
-            "Satin Crafts": [
-
-                "Round Bouquet (Without Glitter)",
-
-                "Round Bouquet (With Glitter)",
-
-                "Classic Rose Bouquet",
-
-                "Single Stem Ribbon Rose",
-
-                "Custom Ribbon Arrangement"
-
-            ],
-
-            "Fuzzy Wire Flowers": [
-
-                "Tulip Bouquet",
-
-                "Sunflower Arrangement",
-
-                "Lily Bouquet",
-
-                "Potted Mini Flowers",
-
-                "Mixed Fuzzy Wire Bouquet"
-
-            ],
-
-            "Other Custom Creations": [
-
-                "Keychains & Accessories",
-
-                "Gift Box Set",
-
-                "Custom Event Favor",
-
-                "Special Request Creation"
-
-            ]
-
-        };
-
-
-        /* ==========================================
-           UPDATE VARIANTS
-        ========================================== */
-
-        craftSelect.addEventListener(
-            "change",
-            function () {
-
-                const selected =
-                    craftSelect.value;
-
-                variantSelect.innerHTML =
-                    "";
-
-                if (
-                    selected &&
-                    variantData[selected]
-                ) {
-
-                    variantData[selected].forEach(
-                        function (variant) {
-
-                            const option =
-                                document.createElement(
-                                    "option"
-                                );
-
-                            option.value =
-                                variant;
-
-                            option.textContent =
-                                variant;
-
-                            variantSelect.appendChild(
-                                option
-                            );
-
-                        }
-                    );
-
-                    variantContainer.style.display =
-                        "block";
-
-                    variantSelect.required =
-                        true;
-
-                } else {
-
-                    variantContainer.style.display =
-                        "none";
-
-                    variantSelect.required =
-                        false;
-                }
-
-            }
+  </div>
+
+  <div id="receipt-upload-container">
+
+    <label for="receipt">
+      📸 Upload GCash Receipt / Screenshot
+      <span class="required">*</span>
+    </label>
+
+    <div class="file-picker">
+      <input
+        type="file"
+        id="receipt"
+        name="receipt"
+        accept="image/jpeg,image/png,image/webp"
+        capture="environment"
+      >
+    </div>
+
+    <p class="field-help">
+      On your phone, you can select a screenshot from Photos/Gallery.
+      JPG, PNG or WEBP. Maximum 25MB. Your receipt is securely uploaded first, then its link is included with your order.
+    </p>
+
+    <img id="receipt-preview" class="receipt-preview" alt="Receipt preview">
+  </div>
+
+  <div id="form-status" class="form-status" role="alert" aria-live="polite"></div>
+
+  <button type="submit" id="submitOrderBtn" class="submit-order-btn">
+    SUBMIT ORDER
+  </button>
+
+</form>
+</div>
+
+<div class="cta-container">
+  <h3 style="margin-bottom:12px">Prefer ordering via chat?</h3>
+  <a href="https://www.facebook.com/profile.php?id=61576467142168"
+     target="_blank" rel="noopener noreferrer" class="btn-order">
+    Order Here on Facebook
+  </a>
+</div>
+
+</main>
+
+<div id="imageModal" class="modal" onclick="closeModal()">
+  <img id="modalImg" src="" alt="Full size preview" onclick="event.stopPropagation()">
+</div>
+
+<script>
+const IMGBB_API_KEY = "006494015295b6463bd3f0ada4aeac84";
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mnpaevzk";
+
+const variantData = {
+  "Satin Crafts": [
+    "Round Bouquet (Without Glitter)",
+    "Round Bouquet (With Glitter)",
+    "Classic Rose Bouquet",
+    "Single Stem Ribbon Rose",
+    "Custom Ribbon Arrangement"
+  ],
+  "Fuzzy Wire Flowers": [
+    "Tulip Bouquet",
+    "Sunflower Arrangement",
+    "Lily Bouquet",
+    "Potted Mini Flowers",
+    "Mixed Fuzzy Wire Bouquet"
+  ],
+  "Other Custom Creations": [
+    "Keychains & Accessories",
+    "Gift Box Set",
+    "Custom Event Favor",
+    "Special Request Creation"
+  ]
+};
+
+const form = document.getElementById("orderForm");
+const craft = document.getElementById("craft");
+const variantContainer = document.getElementById("variant-container");
+const variant = document.getElementById("craft_variant");
+const payment = document.getElementById("payment_method");
+const receiptContainer = document.getElementById("receipt-upload-container");
+const receipt = document.getElementById("receipt");
+const preview = document.getElementById("receipt-preview");
+const statusBox = document.getElementById("form-status");
+const submitBtn = document.getElementById("submitOrderBtn");
+const orderReference = document.getElementById("order_reference");
+const subject = document.getElementById("subject");
+const deliveryDate = document.getElementById("delivery_date");
+
+function openModal(src) {
+  document.getElementById("modalImg").src = src;
+  document.getElementById("imageModal").style.display = "flex";
+}
+
+function closeModal() {
+  document.getElementById("imageModal").style.display = "none";
+}
+
+function showStatus(message, type) {
+  statusBox.textContent = message;
+  statusBox.className = "form-status " + type;
+}
+
+function clearStatus() {
+  statusBox.textContent = "";
+  statusBox.className = "form-status";
+}
+
+function makeOrderId() {
+  const now = new Date();
+  const stamp =
+    now.getFullYear().toString().slice(-2) +
+    String(now.getMonth() + 1).padStart(2, "0") +
+    String(now.getDate()).padStart(2, "0") +
+    "-" +
+    Math.floor(1000 + Math.random() * 9000);
+
+  return "MCC-" + stamp;
+}
+
+function updateVariants() {
+  const selected = craft.value;
+  variant.innerHTML = "";
+
+  if (!selected || !variantData[selected]) {
+    variantContainer.classList.add("hidden");
+    variant.required = false;
+    return;
+  }
+
+  variantData[selected].forEach(item => {
+    const option = document.createElement("option");
+    option.value = item;
+    option.textContent = item;
+    variant.appendChild(option);
+  });
+
+  variantContainer.classList.remove("hidden");
+  variant.required = true;
+}
+
+function updateReceiptVisibility() {
+  const isGCash = payment.value === "GCash";
+
+  receiptContainer.classList.toggle("hidden", !isGCash);
+  receipt.required = isGCash;
+
+  if (!isGCash) {
+    receipt.value = "";
+    preview.src = "";
+    preview.style.display = "none";
+  }
+}
+
+craft.addEventListener("change", updateVariants);
+payment.addEventListener("change", updateReceiptVisibility);
+
+receipt.addEventListener("change", () => {
+  clearStatus();
+
+  const file = receipt.files[0];
+
+  if (!file) {
+    preview.src = "";
+    preview.style.display = "none";
+    return;
+  }
+
+  const allowedTypes = [
+    "image/jpeg",
+    "image/png",
+    "image/webp"
+  ];
+
+  if (!allowedTypes.includes(file.type)) {
+    receipt.value = "";
+    preview.src = "";
+    preview.style.display = "none";
+
+    showStatus(
+      "Please upload a JPG, PNG, or WEBP image.",
+      "error"
+    );
+
+    return;
+  }
+
+  // ImgBB currently accepts images up to 32 MB.
+  // We use 25 MB here to leave a little safety margin.
+  if (file.size > 25 * 1024 * 1024) {
+    receipt.value = "";
+    preview.src = "";
+    preview.style.display = "none";
+
+    showStatus(
+      "Your receipt is larger than 25MB. Please choose a smaller screenshot.",
+      "error"
+    );
+
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.onload = event => {
+    preview.src = event.target.result;
+    preview.style.display = "block";
+  };
+
+  reader.readAsDataURL(file);
+});
+
+function uploadReceiptToImgBB(file) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const imageData = new FormData();
+      imageData.append("image", file);
+      imageData.append(
+        "name",
+        "melian-receipt-" + Date.now()
+      );
+
+      const uploadUrl =
+        "https://api.imgbb.com/1/upload?key=" +
+        encodeURIComponent(IMGBB_API_KEY);
+
+      const response = await fetch(uploadUrl, {
+        method: "POST",
+        body: imageData
+      });
+
+      let result = null;
+
+      try {
+        result = await response.json();
+      } catch (_) {
+        reject(
+          new Error(
+            "The receipt upload service returned an invalid response."
+          )
         );
+        return;
+      }
 
+      if (!response.ok || !result.success) {
+        console.error("ImgBB upload error:", result);
 
-        /* ==========================================
-           RECEIPT VISIBILITY
-        ========================================== */
+        let message = "The GCash receipt could not be uploaded.";
 
-        function updateReceiptVisibility() {
-
-            if (
-                paymentMethod.value ===
-                "GCash"
-            ) {
-
-                receiptContainer.style.display =
-                    "block";
-
-                receiptInput.required =
-                    true;
-
-            } else {
-
-                receiptContainer.style.display =
-                    "none";
-
-                receiptInput.required =
-                    false;
-
-                receiptInput.value =
-                    "";
-
-                clearReceiptPreview();
-            }
-
+        if (result && result.error && result.error.message) {
+          message = result.error.message;
         }
 
+        reject(new Error(message));
+        return;
+      }
 
-        paymentMethod.addEventListener(
-            "change",
-            updateReceiptVisibility
+      if (!result.data || !result.data.url) {
+        reject(
+          new Error(
+            "The receipt was uploaded, but no receipt link was returned."
+          )
         );
+        return;
+      }
+
+      resolve(result.data.url);
+
+    } catch (error) {
+      console.error("ImgBB network error:", error);
+
+      reject(
+        new Error(
+          "Could not upload the receipt. Please check your internet connection and try again."
+        )
+      );
+    }
+  });
+}
+
+async function sendToFormspree(payload) {
+  const response = await fetch(FORMSPREE_ENDPOINT, {
+    method: "POST",
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  });
+
+  let result = null;
+
+  try {
+    result = await response.json();
+  } catch (_) {}
+
+  if (!response.ok) {
+    console.error("Formspree error:", result);
+
+    let message = "Your order could not be submitted.";
+
+    if (result && Array.isArray(result.errors)) {
+      message = result.errors
+        .map(error => error.message || "Please check your form.")
+        .join(" ");
+    } else if (result && result.error) {
+      message = result.error;
+    }
+
+    throw new Error(message);
+  }
+
+  return result;
+}
+
+function saveLocalBackup(order) {
+  try {
+    const orders = JSON.parse(
+      localStorage.getItem("melian_orders") || "[]"
+    );
+
+    orders.push(order);
+
+    localStorage.setItem(
+      "melian_orders",
+      JSON.stringify(orders)
+    );
+  } catch (error) {
+    console.warn("Local backup failed:", error);
+  }
+}
+
+function showSuccess(orderId) {
+  document.getElementById("order-form-section").innerHTML = `
+    <div style="text-align:center;padding:20px 5px">
+      <div class="success-icon">🎉</div>
+
+      <h2>Order Placed Successfully!</h2>
+
+      <p style="font-size:1.05rem;margin-top:8px">
+        Thank you for ordering from
+        <strong>MelianCustomCrafts</strong>!
+      </p>
+
+      <div class="order-reference">
+        <strong>Order Reference</strong><br>
+        <span style="font-size:1.2rem;color:#d81b60">
+          ${orderId}
+        </span>
+      </div>
+
+      <p class="success-note">
+        Your order has been submitted successfully.
+        Your GCash receipt link was included with the order.
+        Please keep your reference number.
+      </p>
+
+      <button
+        class="reload-btn"
+        onclick="location.reload()"
+      >
+        Place Another Order
+      </button>
+    </div>
+  `;
+}
 
+form.addEventListener("submit", async event => {
+  event.preventDefault();
+  clearStatus();
 
-        updateReceiptVisibility();
+  if (!form.checkValidity()) {
+    form.reportValidity();
+    return;
+  }
 
+  if (submitBtn.disabled) {
+    return;
+  }
 
-        /* ==========================================
-           RECEIPT PREVIEW
-        ========================================== */
+  const isGCash = payment.value === "GCash";
 
-        receiptInput.addEventListener(
-            "change",
-            function () {
+  if (isGCash && !receipt.files.length) {
+    showStatus(
+      "Please upload your GCash receipt screenshot before submitting.",
+      "error"
+    );
 
-                clearStatus();
+    receipt.focus();
+    return;
+  }
 
-                const file =
-                    receiptInput.files[0];
+  submitBtn.disabled = true;
 
-                if (!file) {
+  const orderId = makeOrderId();
 
-                    clearReceiptPreview();
+  orderReference.value = orderId;
+  subject.value =
+    "New MelianCustomCrafts Order - " + orderId;
 
-                    return;
-                }
+  try {
+    let receiptUrl = "No receipt uploaded";
 
+    /*
+      STEP 1:
+      Upload the screenshot to ImgBB.
 
-                const allowedTypes = [
+      This is intentionally separate from Formspree because
+      Formspree native file uploads are not available on the
+      free plan. ImgBB returns a public image URL which we
+      then send as ordinary text to Formspree.
+    */
+    if (isGCash) {
+      submitBtn.textContent = "Uploading Receipt...";
 
-                    "image/jpeg",
+      receiptUrl = await uploadReceiptToImgBB(
+        receipt.files[0]
+      );
+    }
 
-                    "image/png",
+    /*
+      STEP 2:
+      Send the order details + receipt URL to Formspree.
+    */
+    submitBtn.textContent = "Submitting Order...";
 
-                    "image/webp"
+    const payload = {
+      subject:
+        "New MelianCustomCrafts Order - " + orderId,
 
-                ];
+      order_reference: orderId,
 
+      name:
+        document.getElementById("name").value.trim(),
 
-                if (
-                    !allowedTypes.includes(
-                        file.type
-                    )
-                ) {
+      email:
+        document.getElementById("email").value.trim(),
 
-                    receiptInput.value =
-                        "";
+      phone:
+        document.getElementById("phone").value.trim(),
 
-                    clearReceiptPreview();
+      craft: craft.value,
 
-                    showStatus(
-                        "Please upload a JPG, PNG, or WEBP image.",
-                        "error"
-                    );
+      craft_variant: variant.value,
 
-                    return;
-                }
+      quantity:
+        document.getElementById("quantity").value,
 
+      delivery_date:
+        deliveryDate.value || "Not specified",
 
-                const maxSize =
-                    10 * 1024 * 1024;
+      address:
+        document.getElementById("address").value.trim(),
 
+      notes:
+        document.getElementById("notes").value.trim() ||
+        "No additional notes",
 
-                if (
-                    file.size >
-                    maxSize
-                ) {
+      payment_method: payment.value,
 
-                    receiptInput.value =
-                        "";
+      receipt_url: receiptUrl
+    };
 
-                    clearReceiptPreview();
+    await sendToFormspree(payload);
 
-                    showStatus(
-                        "Your receipt is larger than 10MB. Please choose a smaller image.",
-                        "error"
-                    );
+    /*
+      Save a local backup after Formspree confirms success.
+    */
+    saveLocalBackup({
+      id: orderId,
+      date: new Date().toLocaleString(),
+      ...payload
+    });
 
-                    return;
-                }
+    showSuccess(orderId);
 
+  } catch (error) {
+    console.error("ORDER SUBMISSION ERROR:", error);
 
-                const reader =
-                    new FileReader();
+    showStatus(
+      error.message ||
+      "Something went wrong. Please try again or order through Facebook.",
+      "error"
+    );
 
+    submitBtn.disabled = false;
+    submitBtn.textContent = "SUBMIT ORDER";
+  }
+});
 
-                reader.onload =
-                    function (event) {
+const today = new Date();
 
-                        receiptPreview.src =
-                            event.target.result;
+deliveryDate.min =
+  today.getFullYear() +
+  "-" +
+  String(today.getMonth() + 1).padStart(2, "0") +
+  "-" +
+  String(today.getDate()).padStart(2, "0");
 
-                        receiptPreview.style.display =
-                            "block";
-                    };
-
-
-                reader.readAsDataURL(file);
-
-            }
-        );
-
-
-        function clearReceiptPreview() {
-
-            receiptPreview.src =
-                "";
-
-            receiptPreview.style.display =
-                "none";
-        }
-
-
-        /* ==========================================
-           STATUS
-        ========================================== */
-
-        function showStatus(
-            message,
-            type
-        ) {
-
-            formStatus.textContent =
-                message;
-
-            formStatus.className =
-                "form-status " +
-                type;
-        }
-
-
-        function clearStatus() {
-
-            formStatus.textContent =
-                "";
-
-            formStatus.className =
-                "form-status";
-        }
-
-
-        /* ==========================================
-           UPLOAD TO IMGBB
-        ========================================== */
-
-        async function uploadReceipt(
-            file
-        ) {
-
-            const formData =
-                new FormData();
-
-            formData.append(
-                "image",
-                file
-            );
-
-
-            const url =
-                "https://api.imgbb.com/1/upload?key=" +
-                encodeURIComponent(
-                    IMGBB_API_KEY
-                );
-
-
-            const response =
-                await fetch(
-                    url,
-                    {
-                        method: "POST",
-                        body: formData
-                    }
-                );
-
-
-            let result;
-
-            try {
-
-                result =
-                    await response.json();
-
-            } catch {
-
-                throw new Error(
-                    "The receipt upload service returned an invalid response."
-                );
-            }
-
-
-            if (
-                !response.ok ||
-                !result.success
-            ) {
-
-                console.error(
-                    "ImgBB error:",
-                    result
-                );
-
-                throw new Error(
-                    "Your receipt could not be uploaded. Please try again."
-                );
-            }
-
-
-            if (
-                !result.data ||
-                !result.data.url
-            ) {
-
-                throw new Error(
-                    "Receipt uploaded but no image link was returned."
-                );
-            }
-
-
-            return result.data.url;
-        }
-
-
-        /* ==========================================
-           SEND TO FORMSPREE
-        ========================================== */
-
-        async function sendToFormspree(
-            payload
-        ) {
-
-            const response =
-                await fetch(
-                    FORMSPREE_ENDPOINT,
-                    {
-                        method: "POST",
-
-                        headers: {
-
-                            "Accept":
-                                "application/json",
-
-                            "Content-Type":
-                                "application/json"
-
-                        },
-
-                        body:
-                            JSON.stringify(
-                                payload
-                            )
-                    }
-                );
-
-
-            let result = null;
-
-
-            try {
-
-                result =
-                    await response.json();
-
-            } catch {
-
-                result =
-                    null;
-            }
-
-
-            if (
-                !response.ok
-            ) {
-
-                console.error(
-                    "Formspree error:",
-                    result
-                );
-
-
-                let message =
-                    "Your order could not be submitted.";
-
-
-                if (
-                    result &&
-                    result.errors &&
-                    Array.isArray(
-                        result.errors
-                    )
-                ) {
-
-                    message =
-                        result.errors
-                            .map(
-                                error =>
-                                    error.message ||
-                                    "Form error"
-                            )
-                            .join(" ");
-
-                } else if (
-                    result &&
-                    result.error
-                ) {
-
-                    message =
-                        result.error;
-                }
-
-
-                throw new Error(
-                    message
-                );
-            }
-
-
-            return result;
-        }
-
-
-        /* ==========================================
-           LOCAL BACKUP
-        ========================================== */
-
-        function saveLocalOrder(
-            order
-        ) {
-
-            try {
-
-                const existing =
-                    JSON.parse(
-                        localStorage.getItem(
-                            "melian_orders"
-                        ) || "[]"
-                    );
-
-
-                existing.push(order);
-
-
-                localStorage.setItem(
-                    "melian_orders",
-                    JSON.stringify(
-                        existing
-                    )
-                );
-
-            } catch (error) {
-
-                console.warn(
-                    "Local backup failed:",
-                    error
-                );
-
-            }
-
-        }
-
-
-        /* ==========================================
-           SUCCESS SCREEN
-        ========================================== */
-
-        function showSuccess(
-            orderId
-        ) {
-
-            const section =
-                document.getElementById(
-                    "order-form-section"
-                );
-
-
-            section.innerHTML = `
-
-                <div
-                    style="
-                        text-align:center;
-                        padding:2rem 1rem;
-                    "
-                >
-
-                    <div class="success-icon">
-                        🎉
-                    </div>
-
-
-                    <h2>
-                        Order Placed Successfully!
-                    </h2>
-
-
-                    <p
-                        style="
-                            font-size:1.05rem;
-                            margin-top:0.5rem;
-                        "
-                    >
-                        Thank you for ordering from
-                        <strong>
-                            MelianCustomCrafts
-                        </strong>!
-                    </p>
-
-
-                    <div class="order-reference">
-
-                        <strong>
-                            Order Reference
-                        </strong>
-
-                        <br>
-
-                        <span
-                            style="
-                                font-size:1.2rem;
-                                color:#d81b60;
-                            "
-                        >
-                            ${orderId}
-                        </span>
-
-                    </div>
-
-
-                    <p class="success-note">
-
-                        Your order has been submitted.
-                        Please keep your reference number
-                        in case you need to contact us.
-
-                    </p>
-
-
-                    <button
-                        class="reload-btn"
-                        onclick="location.reload()"
-                    >
-                        Place Another Order
-                    </button>
-
-                </div>
-
-            `;
-        }
-
-
-        /* ==========================================
-           FORM SUBMISSION
-        ========================================== */
-
-        orderForm.addEventListener(
-            "submit",
-            async function (event) {
-
-                event.preventDefault();
-
-                clearStatus();
-
-
-                /* Browser validation */
-
-                if (
-                    !orderForm.checkValidity()
-                ) {
-
-                    orderForm.reportValidity();
-
-                    return;
-                }
-
-
-                /* Prevent double click */
-
-                if (
-                    submitButton.disabled
-                ) {
-
-                    return;
-                }
-
-
-                /* Receipt check */
-
-                if (
-                    paymentMethod.value ===
-                    "GCash" &&
-                    receiptInput.files.length === 0
-                ) {
-
-                    showStatus(
-                        "Please upload your GCash payment receipt.",
-                        "error"
-                    );
-
-                    receiptInput.focus();
-
-                    return;
-                }
-
-
-                submitButton.disabled =
-                    true;
-
-                submitButton.textContent =
-                    "Preparing Order...";
-
-
-                try {
-
-
-                    /* ==============================
-                       ORDER ID
-                    ============================== */
-
-                    const orderId =
-                        "MCC-" +
-                        Date.now()
-                            .toString()
-                            .slice(-8);
-
-
-                    /* ==============================
-                       RECEIPT
-                    ============================== */
-
-                    let receiptUrl =
-                        "No receipt uploaded";
-
-
-                    if (
-                        paymentMethod.value ===
-                        "GCash"
-                    ) {
-
-                        submitButton.textContent =
-                            "Uploading Receipt...";
-
-
-                        receiptUrl =
-                            await uploadReceipt(
-                                receiptInput.files[0]
-                            );
-                    }
-
-
-                    /* ==============================
-                       PAYLOAD
-                    ============================== */
-
-                    submitButton.textContent =
-                        "Submitting Order...";
-
-
-                    const payload = {
-
-                        subject:
-                            "New MelianCustomCrafts Order - " +
-                            orderId,
-
-                        order_reference:
-                            orderId,
-
-                        name:
-                            document
-                                .getElementById(
-                                    "name"
-                                )
-                                .value
-                                .trim(),
-
-                        email:
-                            document
-                                .getElementById(
-                                    "email"
-                                )
-                                .value
-                                .trim(),
-
-                        phone:
-                            document
-                                .getElementById(
-                                    "phone"
-                                )
-                                .value
-                                .trim(),
-
-                        craft:
-                            craftSelect.value,
-
-                        craft_variant:
-                            variantSelect.value,
-
-                        quantity:
-                            document
-                                .getElementById(
-                                    "quantity"
-                                )
-                                .value,
-
-                        delivery_date:
-                            document
-                                .getElementById(
-                                    "delivery_date"
-                                )
-                                .value ||
-                            "Not specified",
-
-                        address:
-                            document
-                                .getElementById(
-                                    "address"
-                                )
-                                .value
-                                .trim(),
-
-                        notes:
-                            document
-                                .getElementById(
-                                    "notes"
-                                )
-                                .value
-                                .trim() ||
-                            "No additional notes",
-
-                        payment_method:
-                            paymentMethod.value,
-
-                        receipt_url:
-                            receiptUrl
-
-                    };
-
-
-                    /* ==============================
-                       SEND TO FORMSPREE
-                    ============================== */
-
-                    await sendToFormspree(
-                        payload
-                    );
-
-
-                    /* ==============================
-                       SAVE BACKUP
-                    ============================== */
-
-                    saveLocalOrder({
-
-                        id:
-                            orderId,
-
-                        date:
-                            new Date()
-                                .toLocaleString(),
-
-                        ...payload
-
-                    });
-
-
-                    /* ==============================
-                       SUCCESS
-                    ============================== */
-
-                    showSuccess(
-                        orderId
-                    );
-
-
-                } catch (error) {
-
-                    console.error(
-                        "ORDER ERROR:",
-                        error
-                    );
-
-
-                    showStatus(
-                        error.message ||
-                        "Something went wrong. Please try again or order through Facebook.",
-                        "error"
-                    );
-
-
-                    submitButton.disabled =
-                        false;
-
-                    submitButton.textContent =
-                        "SUBMIT ORDER";
-
-                }
-
-            }
-        );
-
-
-        /* ==========================================
-           PREVENT PAST DELIVERY DATES
-        ========================================== */
-
-        const deliveryDate =
-            document.getElementById(
-                "delivery_date"
-            );
-
-
-        const today =
-            new Date();
-
-
-        const year =
-            today.getFullYear();
-
-
-        const month =
-            String(
-                today.getMonth() + 1
-            ).padStart(2, "0");
-
-
-        const day =
-            String(
-                today.getDate()
-            ).padStart(2, "0");
-
-
-        deliveryDate.min =
-            `${year}-${month}-${day}`;
-
-
-    </script>
+updateVariants();
+updateReceiptVisibility();
+</script>
 
 </body>
 </html>
